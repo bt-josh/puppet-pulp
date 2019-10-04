@@ -299,4 +299,13 @@ class pulp::config {
     creates => '/etc/pki/pulp/ca.crt',
   }
 
+  exec { 'purge_apache_pulp_file':
+    command => '/bin/rm -f /etc/httpd/conf.d/pulp.conf',
+    onlyif  => '/bin/test -f /etc/httpd/conf.d/pulp.conf',
+  }
+
+  exec { 'purge_apache_pulp_content_file':
+    command => '/bin/rm -f /etc/httpd/conf.d/pulp_content.conf',
+    onlyif  => '/bin/test -f /etc/httpd/conf.d/pulp_content.conf',
+  }
 }
